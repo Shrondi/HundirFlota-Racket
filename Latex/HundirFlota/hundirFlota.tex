@@ -1,0 +1,344 @@
+%\documentclass{beamer}
+\documentclass[11pt]{beamer}
+
+%\usepackage[english]{babel}
+% or whatever
+% ESPAÑOL 
+
+\usepackage[spanish]{babel}
+\usepackage{tikz}
+
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+% or whatever
+
+%\usepackage{times}
+
+
+%\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+%\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps}
+%\usepackage{pgf,pgfarrows}
+\usepackage{pgfarrows}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{algoritmo}
+\usepackage{hyperref}
+%%\usepackage{graphicx}
+
+\usepackage{amssymb, amsmath, amsbsy} % librerias ams
+
+\usepackage{dirtree}
+
+
+%% Numbered captions
+\setbeamertemplate{caption}[numbered]
+
+\mode<presentation>
+{
+% \usetheme{Warsaw}
+  % or ...
+%  \usetheme{Rochester}
+%%  \usetheme{Pittsburgh}
+%  \usetheme{Montpellier}
+%  \usetheme{Malmoe}
+%  \usetheme{Madrid}
+%  \usetheme{Luebeck}
+%%  \usetheme{JuanLesPins}
+%  \usetheme{default}
+%  \usetheme{Copenhagen}
+%  \usetheme{CambridgeUS}
+%  \usetheme{boxes}
+%  \usetheme{Boadilla}
+%%  \usetheme{Bergen}
+%  \usetheme{Antibes}
+%  \usetheme{AnnArbor}
+  
+\setbeamercovered{transparent}
+ % or whatever (possibly just delete it)
+ 
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%%\usecolortheme{dove}
+%\usecolortheme{default}
+%%%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+
+\useinnertheme[shadow=true]{rounded}
+\usecolortheme{orchid}
+\usecolortheme{whale}
+%%\usecolortheme{wolverine}
+
+\definecolor{steelblue}{rgb}{0.27, 0.51, 0.71}
+\definecolor{crimson}{rgb}{0.86, 0.08, 0.24}
+\definecolor{navyblue}{rgb}{0.0, 0.0, 0.5}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{darkkhaki}{rgb}{0.74, 0.72, 0.42}
+\definecolor{darkcerulean}{rgb}{0.03, 0.27, 0.49}
+\colorlet{verde-oscuro}{green!20!black}
+\colorlet{verde}{green!50!black}
+
+\colorlet{marron-oscuro}{brown!20!black}
+\colorlet{marron}{brown!50!black}
+
+\colorlet{amarillo-claro}{yellow!50!white}
+
+\colorlet{rosa}{red!50!white}
+
+
+\setbeamertemplate{headline}
+{%
+ \begin{beamercolorbox}{section in head/foot}
+  \vskip5pt
+  \hskip5pt
+  \insertshorttitle{\large Programación Declarativa}
+   %\hskip20pt
+  \hfill 
+  \insertshorttitle{\large Representación gráfica en Racket\hskip5pt}
+  \vskip5pt
+ \end{beamercolorbox}%
+}
+
+\setbeamertemplate{footline}
+{%
+ \begin{beamercolorbox}{section in head/foot}
+  \vskip2pt
+  \hskip10pt
+  \insertshorttitle{Universidad de Córdoba}
+  \hskip45pt
+  \insertshorttitle{4º Grado Ingeniería Informática: Computación}
+  \hskip70pt
+  \insertpagenumber 
+  \hskip2pt 
+  / 
+  \hskip2pt 
+  \insertpresentationendpage
+  \vskip2pt 
+ \end{beamercolorbox}%
+}
+
+}
+
+\newtheorem{teorema}{Teorema}[theorem]
+\newtheorem{demostracion}{Demostración}[theorem]
+\newtheorem{ejemplo}{\textcolor{green}{Ejemplo}}[theorem]
+\newtheorem{ejemplos}{\textcolor{green}{Ejemplos}}[theorem]
+\newtheorem{ejercicio}{\textcolor{brown}{Ejercicio}}[theorem]
+\newtheorem{definicion}{\textcolor{yellow}{Definición}}[theorem]
+\newtheorem{nota}{\textcolor{amarillo-claro}{Nota}}[theorem]
+\newtheorem{notas}{\textcolor{amarillo-claro}{Notas}}[theorem]
+\newtheorem{algoritmo}{\textcolor{red}{Algoritmo}}[theorem]
+
+
+%\title[Short Paper Title] % (optional, use only with long paper titles)
+\title[] % (optional, use only with long paper titles)
+{Hundir la flota}
+
+\subtitle
+{Representación gráfica en Racket}
+%%\small{\emph{Asignatura de Programación Declarativa}}}
+\author{Carlos Lucena Robles}% (optional, use only with lots of authors)
+
+%{F.~Author\inst{1} \and S.~Another\inst{2}}
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[Universities of Somewhere and Elsewhere] % (optional, but mostly needed)
+{
+  % \inst{1}%
+  Curso 4º de Grado de Ingeniería Informática\\
+  Programación Declarativa. 1º Cuatrimestre\\
+  Escuela Politécnica Superior\\
+  Universidad de Córdoba
+  % \and
+  % \inst{2}%
+  % Department of Theoretical Philosophy\\
+  % University of Elsewhere
+ }
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+%\date[Short Occasion] % (optional)
+%{Date / Occasion}
+\date{Curso académico 2023 - 2024 \\
+Córdoba, 8 de enero de 2024}
+
+%\subject{Talks}
+\subject{Hundir la flota. Representación gráfica en Racket}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+% \pgfdeclareimage[height=0.5cm]{University-logo}{university-logo-filename}
+%\logo{\pgfuseimage{university-logo}}
+
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+
+
+%\AtBeginSection[]
+%{
+ % \begin{frame}<beamer>
+ %   \frametitle{Contenido del Trabajo}
+    %\tableofcontents[currentsection,currentsubsection]
+ %   \tableofcontents[currentsection,hideallsubsections]
+%  \end{frame}
+%}
+
+%\AtBeginSubsection[]
+%{
+ % \begin{frame}<beamer>
+%   \frametitle{Contenido del apartado}
+   %\tableofcontents[currentsection,currentsubsection,hideothersubsections]
+%   \tableofcontents[currentsubsection,subsectionstyle=show/shaded/hide]
+   
+%  \end{frame}
+%}
+
+
+%\AtBeginSubsubsection[]
+%{
+%  \begin{frame}<beamer>
+%   \frametitle{Contenido de la sección}
+%   %\tableofcontents[currentsection,currentsubsection,hideothersubsections]
+%   \tableofcontents[currentsubsubsection,subsubsectionstyle=show/shaded/hide]
+   
+%  \end{frame}
+%}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+
+
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    %\frametitle{Sección}
+    \frametitle{\insertsection}
+    %\tableofcontents[currentsection,currentsubsection]
+    %\tableofcontents[currentsection,hideallsubsections]
+
+   %%% \tableofcontents[sectionstyle=show/hide,hideothersubsections]
+
+\tableofcontents[sections={<1-6| handout:0>},sectionstyle=show/shaded,hideallsubsections]
+
+
+\end{frame}
+}
+
+\AtBeginSubsubsection[]
+{
+  \begin{frame}<beamer>
+  \frametitle{Subsección}
+  \frametitle{\insertsection}
+  \framesubtitle{\hskip30pt \insertsubsection}
+
+   %\tableofcontents[currentsection,currentsubsection,hideothersubsections]
+
+%%%   \tableofcontents[currentsubsection,subsectionstyle=show/shaded/hide]
+    
+  %%\tableofcontents[currentsubsection,subsectionstyle=show/shaded/hide]
+   
+   
+   %\tableofcontents[sectionstyle=show/hide,hideothersubsections]
+
+  \tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide, subsubsectionstyle=show/shaded/hide]
+
+  
+ 
+\end{frame}
+}
+
+
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>
+  \frametitle{Subsección}
+  \frametitle{\insertsection}
+  \framesubtitle{\hskip30pt \insertsubsection}
+
+   %\tableofcontents[currentsection,currentsubsection,hideothersubsections]
+
+%%%   \tableofcontents[currentsubsection,subsectionstyle=show/shaded/hide]
+    
+  %%\tableofcontents[currentsubsection,subsectionstyle=show/shaded/hide]
+   
+   
+   %\tableofcontents[sectionstyle=show/hide,hideothersubsections]
+
+  \tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide, subsubsectionstyle=show/shaded/hide]
+
+  
+ 
+\end{frame}
+}
+
+
+
+\begin{document}
+
+\logo{\includegraphics[height=0.8cm,keepaspectratio]{imagenes/escudo.jpg}}
+\setbeamertemplate{sidebar left}{%
+   \vfill%
+   \rlap{\hskip0.1cm%
+         \includegraphics[height=1cm,keepaspectratio]{imagenes/logo-uco.jpg}}
+   \vskip2pt%
+   \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+   \vskip2pt%
+}
+
+\setbeamercolor{alerted text}{fg=purple} 
+\frame{\titlepage}
+\logo{}
+\setbeamertemplate{sidebar left}{}
+
+
+%\begin{frame}
+ % \titlepage
+%\end{frame}
+
+
+
+
+\input{seccion-introduccion.tex}
+
+\input{seccion-descripcion.tex}
+
+\input{seccion-codigo.tex}
+
+\input{seccion-resultados.tex}
+
+\input{seccion-conclusiones.tex}
+
+\input{seccion-referencias.tex}
+
+
+
+% \newpage
+
+% \vspace*{2.9cm}
+% \begin{block}{}
+% \begin{center}
+% \fontsize{20pt}{20pt} \selectfont {Gracias por su atención}
+% \end{center}
+% \end{block}
+
+
+\end{document}

@@ -1,0 +1,190 @@
+#lang scribble/manual
+ 
+ 
+@title{Hundir la flota}
+ 
+@author{Carlos Lucena Robles}
+
+ 
+@table-of-contents[]
+ 
+@section{Descripción del juego}
+
+@subsection{Contrincante}
+
+El único contrincante disponible será la máquina (CPU) que podrá personalizarse con uno de los siguientes algoritmos:
+
+@subsubsection{Algoritmo aleatorio}
+
+La fila y columna que se selecciona para disparar es generada aleatoriamente.
+
+La única restricción será seleccionar casillas no disparadas y que no sean contiguas a
+un barco ya hundido.
+
+@subsubsection{Algoritmo Hunt/Target}
+
+Este algoritmo empieza disparando de forma aleatoria hasta encontrar un barco (modo hunt).
+Una vez que el modo hunt ha encontrado un barco, el modo target precisa la horientación del barco y se sigue disparando hasta que se hunda el barco volviendo de nuevo al modo hunt para encontrar un nuevo objetivo.
+
+Cuando el modo hunt encuentra un objetivo, creará una lista con las casillas vecinas. La lista es usada y ampliada por el modo target.
+
+El algoritmo finalizará cuando todos los barcos han sido hundidos.
+
+@image{resources/hunt_target.gif}
+
+@subsubsub*section{Modo Hunt}
+
+Consiste en disparar de forma aleatoria seleccionando siempre casillas no disparadas con anterioridad y no contiguas a barcos hundidos.
+
+El resultado del disparo determinará la forma de seguir:
+
+@itemlist[
+ @item{ @bold{AGUA:}
+  se produce un cambio de turno. Cuando sea otra vez el turno de la CPU volverá a modo hunt (para buscar un nuevo objetivo).
+ }
+ @item{ @bold{HUNDIDO:}
+  se vuelve al modo hunt para buscar el siguiente objetivo.
+ }
+ @item{ @bold{TOCADO:}
+  un barco ha sido alcanzado. Se añaden sus cuatro casillas vecinas (dentro de los límites del tablero y casillas no disparadas ni contiguas a barcos hundidos) a una lista de objetivos que será usada seguidamente por el modo target.
+ }
+ ]
+
+@subsubsub*section{Modo Target}                
+
+Cuando un barco es TOCADO en el modo hunt, se ha rellenado la lista de objetivos con sus cuatro casillas vecinas (Norte, Sur, Este y Oeste).
+
+Para determinar la posicion del barco, se hacen disparos en esas casilla vecinas. El resultado del disparo (en cualquiera de las casillas) supone las siguientes acciones:
+
+@itemlist[
+ @item{ @bold{AGUA:}
+  se produce un cambio de turno. Cuando sea otra vez el turno de la CPU volverá al modo target (para descartar los objetivos restantes).
+ }
+ @item{ @bold{HUNDIDO:}
+  se vuelve al modo hunt para buscar un nuevo objetivo. La lista de objetivos se vacía.
+ }
+ @item{ @bold{TOCADO:}
+  si la casilla está en la misma columna el barco es vertical; si está en la misma fila es horizontal.
+ }
+ ]
+
+Una vez determinada la horientación del barco se eliminan (si aún existen) los objetivos residuales de la lista de objetivos (casillas Norte y Sur si el barco es horizontal o las casillas Este y Oeste si el barco es vertical).
+
+Se añade la siguiente casilla (dentro de los límites del tablero y casillas no disparadas ni contiguas a barcos ya hundidos) de la misma fila (si el barco es horizontal) o de la misma columna (si es vertical).
+
+En las sucesivas llamadas al modo target, se elige el primer elemento de la lista de objetivos, se procesa, se elimina y se añade la siguiente nueva casilla objetivo (dependiendo de la horientación) hasta que el barco sea hundido y se vuelva de nuevo al modo hunt para buscar un nuevo objetivo.
+
+@subsection{Barcos}
+
+
+
+@subsection{Colocación de los barcos}
+Los barcos pueden ser colocados de cuatro formas distintas:
+
+@itemlist[
+          @item{ @bold{Colocar barco manualmente.}
+                  
+           El usuario coloca el barco en el tablero haciendo @italic{click izquierdo} o @italic{click derecho} con el ratón
+           sobre cualquier casilla de su tablero. La casilla @italic{clickada} es en realidad la posición de la proa del barco.
+
+           Si se hace @italic{click izquierdo} el barco es colocado horizontalmente, mientras que @italic{click derecho} coloca el barco verticalmente.
+
+           Por tanto, si se elige colocar el barco de forma horizontal, el barco será colocado hacia la derecha (hacia el Este) desde la casilla seleccionada.
+           Si el barco es orientado verticalmente, será dispuesto hacia abajo (hacia el Sur) desde la casilla @italic{clickada}
+
+           El barco no será colocado si se elige una casilla que implica que el barco se salga del tablero
+           }
+
+           @item{ @bold{Colocar barco aleatoriamente.}
+
+            Usando el botón Generar barco, se coloca un barco en una posición aleatoria sobre el tablero (la orientación es también aleatoria).
+            
+            Este modo no es excluyente con el anterior, es decir, se puede seguir @italic{clickando} en el tablero para colocar los barcos
+            dando la posibilidad de usar los dos modos de forma conjunta alternándolos o no.
+            }
+
+           @item{ @bold{Colocar flota aleatoriamente.}
+
+             Todos los barcos son colocados aleatoriamente sobre el tablero (la orientación también es aleatoria).
+           }
+
+            @item{ @bold{Cargar tablero desde el archivador.}
+
+             Pulsado el botón archivador permite acceder a la funcionalidad archivador de tableros para seleccionar un tablero guardado con anterioridad para volver a usarlo.
+           }
+    ]
+
+ @margin-note{Generar un barco aleatoriamente o colocarlo manualmente, siempre genera una representación visual con colores grisáceos alrededor del barco,
+             indicando que ninguna parte de otros barcos puede tocar esa zona. }
+ @margin-note{El orden de la colocación de la flota siempre es en orden descendente al tamaño del barco.}
+
+
+Una vez que todos los barcos son colocados sobre el tablero se habilita el botón de Confirmar. Si queda algún barco por colocar, el botón permanecerá inactivo.
+
+Durante todo el proceso de colocación el botón Limpiar tablero siempre permanece activo, permitiendo borrar todos los barcos colocados en ese momento
+y volviendo a estar disponibles para su colocación.
+
+El botón Guardar tablero también se habilita si todos los barcos son colocados permitiendo así guardar el tablero en el archivador.
+
+
+
+
+@section[#:tag "interfaz"]{GUI}
+
+@subsection[#:tag "interfaz-juego"]{Juego}
+
+La interfaz del juego está constituida por tres zonas bien diferenciadas:
+
+@subsubsection{Encabezado}
+
+Los elementos presentes en el encabezado son visibles durante toda la partida
+
+
+@subsubsection{Tableros e información}
+Es el núcleo del juego. 
+ 
+ 
+ 
+@section{Elementos de la interfaz}
+
+@subsection{Botones}
+@subsubsection{Aumentar}
+Localización: Encabezado
+Función: Aumentar el tamaño visual de los tableros
+
+@subsubsection{Disminuir}
+Localización: Encabezado
+Función: Disminuir el tamaño visual de los tableros
+
+@subsubsection{Archivador}
+Localización: Pie
+Función: Abre un diálogo que muestra el archivador de tableros.
+
+@subsubsection{Confirmar}
+Localización: Pie
+Función: Inicia la partida
+Requisitos especiales: Este botón solo se habilita una vez que el usuario haya dispuesto toda la flota disponible sobre el tablero
+
+@subsubsection{Limpiar tablero}
+Localización: Pie
+Función: Limpia el tablero del jugador y vuelve a estar disponible la flota para su colocación.
+Efectos: Deshabilita el botón confirmar. Habilita el botón generar barco
+
+@subsubsection{Generar flota}
+Localización: Pie
+Función: Coloca toda la flota sobre el tablero del jugador de forma aleatoria. La orientación es aleatoria
+
+@subsubsection{Generar barco}
+Localización: Pie
+Función: Coloca cada barco de la flota en orden descendente de tamaño. La orientación es aleatoria.
+Efectos: Este botoón se deshabilita una vez que toda la flota ha sido colocada.
+
+@subsubsection{Guardar tablero}
+Localización: Pie
+Función: Guarda un tablero válido en el archivador de tableros
+Requisitos especiales: Este botón solo se habilita si la flota es válida
+
+
+
+ 
+See @secref{chickens}
