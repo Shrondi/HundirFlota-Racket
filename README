@@ -1,75 +1,88 @@
-PROYECTO HUNDIR LA FLOTA.
-Carlos Lucena Robles
----------------------------
-Programación Declarativa
-Curso 2023 - 2014. 
-Universidad de Córdoba
-4º Grado de Ingeniería Informática
+# Proyecto Hundir la Flota
 
+**Autor:** Carlos Lucena Robles  
+**Asignatura:** Programación Declarativa  
+**Curso:** 2023 - 2024  
+**Universidad:** Universidad de Córdoba  
+**Grado:** 4º de Ingeniería Informática  
 
+---
 
-* VERSIÓN 1
------------
- - Incluye caracteres Unicode (podrían no ser visibles determinados iconos dependiendo de la configuración del SO)
- - Incluye una imagen con trasparencia que podría ser opaca en algunos SO (solo molesta en la jugabilidad)
+## Descripción
 
-* VERSIÓN 2
------------
- - NO incluye caracteres Unicode
- - NO existe la imagen con trasparencia en el cambio de turno
+Proyecto realizado para la asignatura de Programación Declarativa basado en el juego "Hundir la Flota" utilizando programación declarativa e interfaces gráficas en Racket.
 
+---
 
-* EJECUCIÓN
---------------
+## Versiones
 
-1. Abrir main.rkt con el intéprete DrRacket (versión mínima 8.4) 
-2. Seleccionar Determine language from source
-3. (Opcional)
-   En Choose Language > Show Details, se recomienda activar No debugging or profiling y 
-   desmarcar la casilla Preserve Stacktrace.
-   Ayuda a una ejecución más rápida y que consuma menos memoria.
-   
-   Se puede crear un ejecutable desde Racket > Create Executable para instalar el cualquier otra máquina, además,
-   la mejora de eficiencia será más notable ya que el intérprete no compartirá los recursos de la app.
-   
-   
-   
-* ESTRUCTURA PROYECTO
-----------------------
+### Versión 1: HundirFlotaV1
+- Incluye caracteres Unicode (puede que algunos iconos no sean visibles dependiendo de la configuración del sistema operativo).
+- Incluye una imagen con transparencia usada durante el cambio de turno que podría aparecer como opaca en algunos sistemas operativos. No afecta a la jugabilidad, solo es un efecto visual.
 
-HundirFlotaV1_ejecutable # Programa compilado
+### Versión 2: HundirFlotaV2
+- No incluye los caracteres Unicode que son sustituidos por texto.
+- No incluye la imagen con transparencia mostrada durante el cambio de turno.
 
-HundirFlotaV1/ # Raiz del proyecto
-|-- archivo-tableros/   # Archivador de tableros (generado).
-|-- gui/               # Elementos de la interfaz.
-|   |-- botones.rkt.
-|   |-- canvas.rkt.
-|   |-- dialogos.rkt.
-|   |-- mensajes.rkt.
-|   |-- opciones.rkt.
-|   |-- paneles.rkt.
-|   |-- temporizadores.rkt.
-|   |-- textos.rkt.
-|   |-- ventana.rkt.
-|-- funcionesCallback/  # Funciones de los elementos gráficos.
-|   |-- callbackBotones.rkt.
-|   |-- callbackCanvas.rkt.
-|   |-- callbackDialogos.rkt.
-|   |-- callbackOpciones.rkt.
-|   |-- callbackTemporizadores.rkt.
-|   |-- callbackVentanas.rkt.
-|-- funciones.rkt      # Funciones variadas.
-|-- funcionesGUI.rkt   # Funciones variadas de GUI.
-|-- turno.rkt          # Función cambio de turno.
-|-- funcionesLimpiar.rkt   # Limpieza de canvases.
-|-- funcionesColocar.rkt   # Colocación de barcos y su lógica.
-|-- funcionesDibujar.rkt   # Dibujado en canvas.
-|-- funcionesDisparar.rkt  # Lógica de disparar.
-|-- funcionesGenerar.rkt   # Generación aleatoria en la colocación de barcos.
-|-- funcionesLogica.rkt    # Lógica del juego.
-|-- imagenes/          # Recursos gráficos.
-|-- ayuda/             # Recursos de ayuda.
-|-- main.rkt           # Programa principal.
-|-- estructuras.rkt    # Estructuras principales.
-|-- macros.rkt         # Macros globales.
+---
 
+## Ejecución
+### Desde el intérprete de Racket
+1. Abrir el archivo `HundirFlotaVX/main.rkt` (siendo X el número de la versión 1 o 2) con el intérprete DrRacket (versión mínima 8.4).
+2. Seleccionar la opción _"Determine language from source"_.
+3. (Opcional) Para una ejecución más eficiente:
+   - Ir a **Choose Language > Show Details**.
+   - Activar **No debugging or profiling**.
+   - Desmarcar la casilla **Preserve Stacktrace**.
+   Esto mejorará el rendimiento y reducirá el consumo de memoria.
+4. Pulsar sobre Run para que la aplicación empiece a ejecutarse.
+
+### Desde la aplicación compilada
+Dentro del directorio `HundirFlotaVX_ejecutable/bin`, se encuentra la aplicación `main` compilada y lista para ser ejecuta sin necesidad de abrir el intérprete.
+
+**Extra:** Para crear un ejecutable, dentro del intérprete se encuentra la opción **Racket > Create Executable**. Esto permitirá generar un archivo instalable en otras máquinas, mejorando además la eficiencia al no depender del intérprete.
+
+---
+
+## Estructura del repositorio
+
+```bash
+HundirFlotaV1_ejecutable   # Programa compilado
+HundirFlotaV2_ejecutable 
+
+HundirFlotaVX/             # Raíz del proyecto
+|-- archivo-tableros/      # Archivos generados de tableros
+|-- gui/                   # Elementos de la interfaz
+|   |-- botones.rkt
+|   |-- canvas.rkt
+|   |-- dialogos.rkt
+|   |-- mensajes.rkt
+|   |-- opciones.rkt
+|   |-- paneles.rkt
+|   |-- temporizadores.rkt
+|   |-- textos.rkt
+|   |-- ventana.rkt
+|-- funcionesCallback/      # Funciones de los elementos gráficos
+|   |-- callbackBotones.rkt
+|   |-- callbackCanvas.rkt
+|   |-- callbackDialogos.rkt
+|   |-- callbackOpciones.rkt
+|   |-- callbackTemporizadores.rkt
+|   |-- callbackVentanas.rkt
+|-- funciones.rkt           # Funciones generales
+|-- funcionesGUI.rkt        # Funciones específicas de la GUI
+|-- turno.rkt               # Función para cambiar el turno
+|-- funcionesLimpiar.rkt    # Limpieza de canvases
+|-- funcionesColocar.rkt    # Lógica para la colocación de barcos
+|-- funcionesDibujar.rkt    # Dibujado en el canvas
+|-- funcionesDisparar.rkt   # Lógica de disparo
+|-- funcionesGenerar.rkt    # Generación aleatoria de la colocación de barcos
+|-- funcionesLogica.rkt     # Lógica principal del juego
+|-- imagenes/               # Recursos gráficos
+|-- ayuda/                  # Archivos de ayuda
+|-- main.rkt                # Archivo principal del programa
+|-- estructuras.rkt         # Definición de estructuras principales
+|-- macros.rkt              # Macros globales
+
+Latex                       # Código LaTeX usado para generar la presentación
+Presentacion_HundirFlota.pdf
