@@ -37,19 +37,14 @@ Proyecto realizado para la asignatura de Programación Declarativa basado en el 
    Esto mejorará el rendimiento y reducirá el consumo de memoria.
 4. Pulsar sobre Run para que la aplicación empiece a ejecutarse.
 
-### Desde la aplicación compilada
-Dentro del directorio `HundirFlotaVX_ejecutable/bin`, se encuentra la aplicación `main` compilada y lista para ser ejecuta sin necesidad de abrir el intérprete.
-
-**Extra:** Para crear un ejecutable, dentro del intérprete se encuentra la opción **Racket > Create Executable**. Esto permitirá generar un archivo instalable en otras máquinas, mejorando además la eficiencia al no depender del intérprete.
+### Desde la aplicación compilada.
+Para crear un ejecutable, dentro del intérprete se encuentra la opción **Racket > Create Executable**. Esto permitirá generar un archivo instalable en otras máquinas, mejorando además la eficiencia al no depender del intérprete.
 
 ---
 
 ## Estructura del repositorio
 
 ```bash
-HundirFlotaV1_ejecutable   # Programa compilado
-HundirFlotaV2_ejecutable 
-
 HundirFlotaVX/             # Raíz del proyecto
 |-- archivo-tableros/      # Archivos generados de tableros
 |-- gui/                   # Elementos de la interfaz
