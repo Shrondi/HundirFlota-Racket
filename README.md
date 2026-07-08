@@ -1,15 +1,5 @@
 # Proyecto Hundir la Flota
 
-**Autor:** Carlos Lucena Robles  
-**Asignatura:** Programación Declarativa  
-**Curso:** 2023 - 2024  
-**Universidad:** Universidad de Córdoba  
-**Grado:** 4º de Ingeniería Informática  
-
----
-
-## Descripción
-
 Proyecto realizado para la asignatura de Programación Declarativa basado en el juego "Hundir la Flota" utilizando programación declarativa e interfaces gráficas en Racket.
 
 ---
